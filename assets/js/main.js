@@ -46,7 +46,7 @@ function fetchIpInfo() {
 }
 
 function getLatitudeLongitude(ip) {
-  let url = `https://ip-api.com/json/${ip}`;
+  let url = `http://ip-api.com/json/${ip}`;
   const latLong = {};
   (async function (ip) {
     try {
