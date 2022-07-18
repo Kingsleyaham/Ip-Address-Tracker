@@ -35,7 +35,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [github repo](https://github.com/Kingsleyaham/Ip-Address-Tracker)
-- Live Site URL: [ip address tracker](https://kingsleyaham.github.io/Ip-Address-Tracker/)
+- Live Site URL: [ip address tracker](https://ip-tracker-pp.netlify.app//)
 
 ## My process
 
