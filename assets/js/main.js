@@ -24,55 +24,35 @@ function fetchIpInfo() {
       document.querySelector("#ipAdd").textContent = data.ip;
       document.querySelector(
         "#location"
-      ).textContent = `${data.location.country}, ${data.location.region}`;
+      ).textContent = `${data.location.city}, ${data.location.region}`;
       document.querySelector(
         "#timezone"
       ).textContent = `UTC${data.location.timezone}`;
       document.querySelector("#isp").textContent = data.isp;
 
-      ip = data.ip;
+      let latitude = data.location.lat;
+      let longitude = data.location.lng;
 
-      getLatitudeLongitude(ip);
-
-      // console.log(latLong);
+      displayMap(latitude, longitude);
     } catch (error) {
       console.error(error);
     }
   }
 
   fetchDetails(
-    `https://geo.ipify.org/api/v2/country?apiKey=${apiKey}&ipAddress=${ipAddress}&domain=${domain}`
+    `
+https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&ipAddress=${ipAddress}&domain=${domain}`
   );
 }
 
-function getLatitudeLongitude(ip) {
-  let apiKey = "AOEMRZWBUM";
-  let url = `https://api.ip2location.com/v2/?ip=${ip}&key=${apiKey}&package=WS25`;
-  const latLong = {};
-  (async function (ip) {
-    try {
-      const response = await axios.get(url);
-      const data = response.data;
-
-      latLong.lat = data.latitude;
-      latLong.lon = data.longitude;
-
-      // display location map
-      displayLocationMap(latLong);
-    } catch (error) {
-      console.error(error);
-    }
-  })();
-}
-
-function displayLocationMap(latLong) {
-  var container = L.DomUtil.get("map");
+function displayMap(latitude, longitude) {
+  let container = L.DomUtil.get("map");
 
   if (container != null) {
     container._leaflet_id = null;
   }
 
-  var map = L.map("map", {
+  let map = L.map("map", {
     minZoom: 5,
     maxZoom: 25,
     zoomControl: false,
@@ -82,8 +62,8 @@ function displayLocationMap(latLong) {
     attribution: "© OpenStreetMap",
   }).addTo(map);
 
-  map.setView([latLong.lat, latLong.lon], 13);
-  var marker = L.marker([latLong.lat, latLong.lon]).addTo(map);
+  map.setView([latitude, longitude], 13);
+  let marker = L.marker([latitude, longitude]).addTo(map);
 }
 
 // input validation functions
