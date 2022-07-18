@@ -10,7 +10,7 @@ function fetchIpInfo() {
   let inputVal = userInput.value.trim();
   let apiKey = "at_gGAEPaFZ0ZiwutDn4tML5oz8Pr2JV";
   let ipAddress = isIpAddress(inputVal) ? inputVal : "";
-  let domain = isValidUrl(inputVal) ? sanitizeDomain(inputVal) : "";
+  let domain = isValidDomain(inputVal) ? sanitizeDomain(inputVal) : "";
 
   userInput.value = "";
 
@@ -79,7 +79,7 @@ function isIpAddress(ip) {
   return regExp.test(ip);
 }
 
-function isValidUrl(domain) {
+function isValidDomain(domain) {
   let regExp =
     /((?:(?:http?|ftp)[s]*:\/\/)?[a-z0-9-%\/\&=?\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?)/gi;
 
