@@ -46,15 +46,16 @@ function fetchIpInfo() {
 }
 
 function getLatitudeLongitude(ip) {
-  let url = `http://ip-api.com/json/${ip}`;
+  let apiKey = "AOEMRZWBUM";
+  let url = `https://api.ip2location.com/v2/?ip=${ip}&key=${apiKey}&package=WS25`;
   const latLong = {};
   (async function (ip) {
     try {
       const response = await axios.get(url);
       const data = response.data;
 
-      latLong.lat = data.lat;
-      latLong.lon = data.lon;
+      latLong.lat = data.latitude;
+      latLong.lon = data.longitude;
 
       // display location map
       displayLocationMap(latLong);
